@@ -32,9 +32,24 @@
         4. I/O intensive
             NodeJS performs well when hanldling multiple I/O operations simultaneously, thanks to its non-blocking nature
 
-
-
 3. Understand and use Node.js module system
+    **Node module system**
+    - Use 'require' to import and execute other file in node. However, if we want to use the function in the file we import in the current file we will not be able to do so. -> encapsulating nature of js file
 4. Code organisation, exports and imports
+    - A module is encapsulated, if you want to take anything in the module and use it in another file  you need to tell nodeJS your intention by using 'exports' property. 
+     e.g: module.export = add;
+     In other file: var addFn = require('./add.js')
+     --> now I can use add function in test.js
+    - We can export multiple properties and function by exporting an object: module.exports = {add: add, subtract:subtract}. It works the same as: 
+        module.exports.add = add;
+        module.exports.subtract = subtract;
+        ===> in other file, we can use destructuring object format to get all of theses functions and properties with 'require'
+    - module.exports can be shorthanded as 'exports' -> this way we use exports as an alias of module.exports : var exports = module.exports. However, when we write exports = add, we assign a new (undeifned) value to export and it doesn't take reference to module.exports -> be careful with this! --> to use only " exports", we need to write: exports.add = add. In summary, two ways which we can use : 
+        1/ exports.add = add
+        2/ module.exports = add
+    
+
 5. Starting a web server using Node.js
+    - 'require' with NodeJS APIs: fs.writeFileSyc, readline.createInterface
+    - Third party APIs:
 6. Writing a command line utility
