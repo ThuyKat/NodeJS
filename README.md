@@ -51,5 +51,9 @@
 
 5. Starting a web server using Node.js
     - 'require' with NodeJS APIs: fs.writeFileSyc, readline.createInterface
-    - Third party APIs:
+    - Third party APIs: npm has a repo where all third-party libs are hosted online. It's also a command line utility, npm install installs all dependencies by looking at package.json to define dependencies with versions used for the project -> go to online repo -> download those dependencies and make them available in the project
 6. Writing a command line utility
+    - npm init: start a new project -> first question is what package name is -> create a new npm package -> other meta data
+    - add "start" in "script" -> creating an alias for npm -> unify command to run nodeJS project
+    - for custom alias other than "start" and "test", to run the command : "npm run custom_alias" 
+
