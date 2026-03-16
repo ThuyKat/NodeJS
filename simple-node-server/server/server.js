@@ -7,8 +7,9 @@ let PORT = 9000;
 const __dirname = process.cwd();
 const server = http.createServer(async (req, res) => {
   if (req.url.startsWith('/api')) {
+    console.log('with api', req.url);
     if (req.method === 'GET') {
-      let myData = await handleGet();
+      let myData = await handleGet(); //JSON
       //filter data
       let urlObj = new URL(req.url, `https://${req.headers.host}`);
       let queryObj = Object.fromEntries(urlObj.searchParams);
@@ -18,6 +19,7 @@ const server = http.createServer(async (req, res) => {
     }
   }
   if (!req.url.startsWith('/api')) {
+    console.log(req.url);
     return await serveStatic(req, res, __dirname);
   }
 });
