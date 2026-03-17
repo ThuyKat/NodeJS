@@ -8,24 +8,36 @@ import sendResponse from './utils/sendResponse.js';
 
 const PORT = 9000;
 const server = http.createServer(async (req, res) => {
+  console.log(req.url);
   if (req.url === '/api') {
     //serve data if GET method
     if (req.method === 'GET') {
-      const data = await getData(); //JSON format
-
-      //   sendResponse(res, 200, 'application/json', data);
-
+      res.statusCode = 200;
       res.setHeader('Content-Type', 'text/event-stream');
       res.setHeader('Cache-Control', 'no-cache');
       res.setHeader('Connection', 'keep-alive');
-      setInterval(() => {
+      setInterval(async () => {
+        const data = await getData(); //JSON format
+        console.log(data);
+        //   sendResponse(res, 200, 'application/json', data);
+        const time = new Date(data.updatedAt).toLocaleString('en-AU', {
+          timeZone: 'Australia/Melbourne',
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        });
         res.write(
-          `data :${JSON.stringify({
+          `data: ${JSON.stringify({
             event: 'update-price',
-            price: data,
+            price: data.price.toFixed(2),
+            time: time,
           })}\n\n`
         );
-      }, 2000);
+      }, 3000);
     }
   } else if (!req.url.startsWith('/api')) {
     //serve static

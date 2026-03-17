@@ -30,7 +30,7 @@
           / Oz*
         </p>
         <p id="connection-status" class="status" aria-live="polite">
-          Live Price 🟢
+          Live Price <span class="pulse">🟢</span>
         </p>
       </section>
       <form>
@@ -69,7 +69,10 @@
           OK
         </button>
       </dialog>
-      <p class="footnote">* 1oz = 1 troy ounce of 24 Carat Gold</p>
+      <div class="footnote">
+        <p>* 1oz = 1 troy ounce of 24 Carat Gold</p>
+        <p>* Last updated: <span id="updated-at">--</span> (Melbourne, AUS)</p>
+      </div>
     </main>
     <script type="module" src="live.js"></script>
   </body>
