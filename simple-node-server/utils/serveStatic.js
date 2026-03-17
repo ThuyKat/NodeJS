@@ -2,6 +2,15 @@ import path from 'path';
 import fs from 'fs/promises';
 import sendResponse from './sendResponse.js';
 import getContentType from './getContentType.js';
+/**
+ * Serves a static file from the frontend directory based on the request URL.
+ * Responds with 404 if the file is not found.
+ *
+ * @param {import('http').IncomingMessage} req - The HTTP request object
+ * @param {import('http').ServerResponse} res - The HTTP response object
+ * @param {string} dir - The root directory path (process.cwd())
+ * @returns {Promise<void>}
+ */
 export default async function serveStatic(req, res, dir) {
   //path to front end file
   const filePath = path.join(

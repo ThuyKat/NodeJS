@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { getData } from './getData';
+import { getData } from './getData.js';
 
 /**
  * Reads and returns all data from the local JSON data file.
