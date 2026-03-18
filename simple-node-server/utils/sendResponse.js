@@ -1,3 +1,12 @@
+/**
+ * Sends an HTTP response with the given content type, status code, and payload.
+ *
+ * @param {import('http').ServerResponse} res - The HTTP response object
+ * @param {string} header - The Content-Type header value (e.g. 'application/json', 'text/html')
+ * @param {number} status - The HTTP status code (e.g. 200, 404)
+ * @param {string|Buffer} payload - The response body to send
+ * @returns {void}
+ */
 export default function sendResponse(res, header, status, payload) {
   res.setHeader('Content-Type', header);
   res.setHeader('Access-Control-Allow-Origin', '*');

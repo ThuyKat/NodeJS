@@ -3,13 +3,14 @@ import { handleGet } from '../utils/routeHandlers.js';
 import sendResponse from '../utils/sendResponse.js';
 import { getFilteredData } from '../utils/getFilteredData.js';
 import serveStatic from '../utils/serveStatic.js';
+
 let PORT = 9000;
 const __dirname = process.cwd();
 const server = http.createServer(async (req, res) => {
   if (req.url.startsWith('/api')) {
     console.log('with api', req.url);
     if (req.method === 'GET') {
-      let myData = await handleGet(); //JSON
+      let myData = await handleGet(); //call getData(), turn data into string
       //filter data
       let urlObj = new URL(req.url, `https://${req.headers.host}`);
       let queryObj = Object.fromEntries(urlObj.searchParams);
