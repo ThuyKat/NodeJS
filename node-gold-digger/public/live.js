@@ -22,3 +22,44 @@ eventSource.onmessage = (event) => {
 eventSource.onerror = () => {
   console.log('Connection lost. Reconnecting...');
 };
+
+//handle invest button submit
+/*
+- Get the form element
+- add event listener for when submit is clicked
+  - prevent default sending
+  - get the input value
+  - create formData object to hold the input value
+  - in try-catch block, send POST request to server and create response variable to hold the response from server
+  - if response.ok, reset form, display message (if any)
+  - if error, log out the error by using response.statusText
+*/
+const form = document.getElementsByTagName('form')[0];
+console.log(form);
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const inputAmount = document.getElementById('investment-amount').value;
+  const currentPrice = liveContainer.textContent;
+  const currentTime = timeContainer.textContent;
+  const formData = {
+    amount: inputAmount,
+    price: currentPrice,
+    time: currentTime,
+  };
+  try {
+    const response = await fetch('/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    if (response.ok) {
+      form.reset();
+    } else {
+      console.error('Server Error:', response.statusText);
+    }
+  } catch (err) {
+    console.error('Error:', err);
+  }
+});

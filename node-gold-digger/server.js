@@ -29,6 +29,7 @@ const server = http.createServer(async (req, res) => {
           minute: '2-digit',
           second: '2-digit',
           hour12: false,
+          fractionalSecondDigits: 3,
         });
         res.write(
           `data: ${JSON.stringify({
@@ -38,6 +39,37 @@ const server = http.createServer(async (req, res) => {
           })}\n\n`
         );
       }, 3000);
+    } else if (req.method === 'POST') {
+      //get the input amount from request
+      let body = '';
+      for await (let chunk of req) {
+        body += chunk;
+      }
+      let bodyJSON = JSON.parse(body);
+      //add transaction to gold-invest.json
+      let transation = {
+        'amount paid': bodyJSON.amount,
+        'price per Oz': `USD ${bodyJSON.price}`,
+        'gold sold': (bodyJSON.amount / bodyJSON.price).toFixed(4),
+      };
+      const filePath = path.join(
+        import.meta.dirname,
+        'data',
+        'gold-invest.json'
+      );
+      const content = JSON.parse(await fs.readFile(filePath, 'utf8'));
+      content.push({
+        'transaction time': new Date().toISOString(),
+        ...transation,
+      });
+      await fs.writeFile(filePath, JSON.stringify(content, null, 2), 'utf8');
+      console.log('Transaction saved successfully');
+      sendResponse(
+        res,
+        200,
+        'application/json',
+        JSON.stringify({ success: true })
+      );
     }
   } else if (!req.url.startsWith('/api')) {
     //serve static
@@ -63,7 +95,7 @@ const server = http.createServer(async (req, res) => {
           res,
           500,
           'text/html',
-          '<html><h1>Server Error: ${err.code}</h1></html>'
+          `<html><h1>Server Error: ${err.code}</h1></html>`
         );
       }
     }
