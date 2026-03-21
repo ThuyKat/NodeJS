@@ -1,6 +1,0 @@
-{
-  "devDependencies": {
-    "sqlite": "^5.1.1",
-    "sqlite3": "^6.0.1"
-  }
-}

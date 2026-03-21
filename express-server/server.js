@@ -1,7 +1,6 @@
 import express from 'express';
 import { apiRouter } from './routes/apiRoutes';
 const PORT = 8000;
-
 const app = express();
 app.use('/api', apiRouter);
 //if route unfound
