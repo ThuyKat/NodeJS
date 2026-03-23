@@ -11,8 +11,10 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  },
   "devDependencies": {
-    "dotenv": "^17.3.1",
     "nodemon": "^3.1.14"
   }
 }
