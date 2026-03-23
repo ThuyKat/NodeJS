@@ -1,11 +1,5 @@
-/**
- * Update price live
- * - create an eventSource object
- * - grab the elements by id where dynamic info will be displayed
- * - onmessage callback function: take in event, extract information sent by backend server, update elements with the updated info
- * - on error, log out message to console to let the user know about connection failure
- */
 const eventSource = new EventSource('/api');
+
 const liveContainer = document.getElementById('price-display');
 const timeContainer = document.getElementById('updated-at');
 console.log(liveContainer);
