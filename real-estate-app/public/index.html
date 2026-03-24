@@ -14,19 +14,36 @@
   </head>
   <body>
     <header class="top-banner" id="top-banner">
-      <button>Menu</button>
-      <a>reapal.com.au</a>
-      <div>
-        <button>Sign in</button>
-        <button>Join</button>
+      <div class="header-left">
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <span class="menu-label">Menu</span>
       </div>
-      <!-- Navigation -->
-      <!-- <nav >
-        <a href="#">Buy</a>
-        <a href="#">Rent</a>
-        <a href="#">Sold</a>
-        <a href="#">News</a>
-      </nav> -->
+
+      <a class="logo" href="#">reapal.com.au</a>
+
+      <div class="header-right">
+        <button class="btn-signin">Sign in</button>
+        <button class="btn-join">Join</button>
+      </div>
+
+      <div class="nav-dropdown" id="nav-dropdown" aria-hidden="true">
+        <nav class="dropdown-nav">
+          <a href="#">Buy</a>
+          <a href="#">Rent</a>
+          <a href="#">Sold</a>
+          <a href="#">New homes</a>
+          <a href="#">Find agents</a>
+          <a href="#">News</a>
+        </nav>
+        <div class="dropdown-auth">
+          <button class="btn-signin">Sign in</button>
+          <button class="btn-join">Join</button>
+        </div>
+      </div>
     </header>
     <main>
       <div class="hero-section">
@@ -34,17 +51,22 @@
         <div class="search-section-container">
           <div class="search-section">
             <div class="tab-bar">
-              <ul>
-                <li>Buy</li>
-                <li>Rent</li>
-                <li>Sold</li>
-                <li>Address</li>
-                <li>Agent</li>
+              <ul id="tab-list">
+                <li class="tab active" data-placeholder="Search suburb, postcode or state">Buy</li>
+                <li class="tab" data-placeholder="Search suburb, postcode or state">Rent</li>
+                <li class="tab" data-placeholder="Search suburb, postcode or state">Sold</li>
+                <li class="tab" data-placeholder="Search by address">Address</li>
+                <li class="tab" data-placeholder="Search by agent name or agency">Agent</li>
               </ul>
             </div>
           
           <div class="search-form">
-            <input class="search-bar" type="search" />
+            <div class="search-input-wrapper">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input class="search-bar" type="search" placeholder="Search suburb, postcode or state" />
+            </div>
             <div class="buttons">
               <button>Filter</button>
               <button>Search</button>

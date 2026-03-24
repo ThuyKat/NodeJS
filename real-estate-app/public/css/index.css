@@ -5,10 +5,8 @@
   --color-bg: white;
   --color-text: black;
   /* font */
-  --font-base: 'Poppins';
+  --font-base: 'Poppins', sans-serif;
   --font-heading: 'Plaster', sans-serif;
-  /* spacing */
-  /* boder-radius */
 }
 /* Base style */
 * {
@@ -33,7 +31,162 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0 20px 0;
+  padding: 0 1.5rem;
+  height: 3.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 100;
+}
+
+/* Header left: hamburger + logo */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.menu-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Auth buttons */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-signin {
+  background: transparent;
+  border: 1.5px solid #333;
+  padding: 0.35rem 0.9rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-signin:hover {
+  background: #f5f5f5;
+}
+.btn-join {
+  background: #e84d1c;
+  color: white;
+  border: none;
+  padding: 0.35rem 0.9rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-join:hover {
+  background: #c93e10;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+/* Animate to X when open */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Dropdown nav panel */
+.nav-dropdown {
+  display: none;
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  width: 33.333%;
+  bottom: 0;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  z-index: 99;
+  overflow-y: auto;
+}
+.nav-dropdown.open {
+  display: flex;
+}
+.dropdown-nav {
+  display: flex;
+  flex-direction: column;
+}
+.dropdown-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.15s;
+}
+.dropdown-nav a:hover {
+  background: #f5f5f5;
+}
+.dropdown-auth {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+.dropdown-auth .btn-signin,
+.dropdown-auth .btn-join {
+  flex: 1;
+}
+
+/* Hide dropdown auth buttons on desktop since header-right is visible */
+@media (min-width: 769px) {
+  .dropdown-auth {
+    display: none;
+  }
+}
+
+/* Hide header-right on mobile since dropdown-auth covers it */
+@media (max-width: 768px) {
+  .header-right {
+    display: none;
+  }
 }
 .hero-section {
   background-image: url(../images/hero.jpeg);
@@ -41,16 +194,23 @@ header {
   height: 18rem;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 .search-section {
   border-radius: 0.5rem;
   max-width: 46.5rem;
   width: 100%;
+  background-color: white;
 }
 .search-section-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 .tab-bar {
   display: flex;
@@ -62,35 +222,92 @@ header {
   list-style-type: none;
   display: flex;
   width: 100%;
-  justify-content: space-between;
   padding-left: 0;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 .tab-bar li {
-  margin: 0;
-  width: 20%;
+  flex: 1;
   text-align: center;
+  padding: 0.65rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s;
+}
+.tab-bar li:hover {
+  background: rgba(0,0,0,0.06);
+}
+.tab-bar li.active {
+  border-bottom: 2px solid #e84d1c;
 }
 .search-form {
   display: flex;
-  justify-content: flex-start;
   width: 100%;
-  min-height: 5rem;
   position: relative;
-  height: auto;
-  margin: 0px;
+  margin: 0;
+  padding: 1.5rem 0;
+}
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: #888;
+  pointer-events: none;
 }
 .search-bar {
-  position: relative;
-  top: 0px;
-  left: 0px;
   width: 100%;
-  min-height: 5rem;
-  height: auto;
+  height: 3rem;
+  border: none;
+  padding-left: 2.25rem;
+  padding-right: 10rem;
+  outline: none;
+  font-family: var(--font-base);
+  font-size: 0.9rem;
 }
 .buttons {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  align-items: center;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
   display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.buttons button:first-child {
+  background: white;
+  border: 1.5px solid #ccc;
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: border-color 0.15s;
+}
+.buttons button:first-child:hover {
+  border-color: #333;
+}
+.buttons button:last-child {
+  background: #e84d1c;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: background 0.15s;
+}
+.buttons button:last-child:hover {
+  background: #c93e10;
 }
